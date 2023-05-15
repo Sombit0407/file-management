@@ -5,17 +5,17 @@ void create_file() {
     FILE *file;
     char file_name[100];
 
-    printf("Yo, what's the file name? ");
+    printf("Enter the name of the file: ");
     scanf("%s", file_name);
 
     file = fopen(file_name, "w");
 
     if (file == NULL) {
-        printf("Oops, couldn't create the file.\n");
+        printf("Error creating file.\n");
         return;
     }
 
-    printf("File created successfully. Cool!\n");
+    printf("File created successfully.\n");
 
     fclose(file);
 }
@@ -25,21 +25,21 @@ void write_file() {
     char file_name[100];
     char content[1000];
 
-    printf("What's the file name again? ");
+    printf("Enter the name of the file: ");
     scanf("%s", file_name);
 
     file = fopen(file_name, "a");
 
     if (file == NULL) {
-        printf("Sorry, couldn't open the file.\n");
+        printf("Error opening file.\n");
         return;
     }
 
-    printf("What do you wanna write (max 1000 characters)?\n");
+    printf("Enter the content to write (max 1000 characters):\n");
     scanf(" %[^\n]", content);
 
     fprintf(file, "%s\n", content);
-    printf("Cool, content written to the file.\n");
+    printf("Content written to the file.\n");
 
     fclose(file);
 }
@@ -49,13 +49,13 @@ void read_file() {
     char file_name[100];
     char content[1000];
 
-    printf("What's the file name? ");
+    printf("Enter the name of the file: ");
     scanf("%s", file_name);
 
     file = fopen(file_name, "r");
 
     if (file == NULL) {
-        printf("Oops, couldn't open the file.\n");
+        printf("Error opening file.\n");
         return;
     }
 
@@ -71,23 +71,23 @@ void read_file() {
 void delete_file() {
     char file_name[100];
 
-    printf("What's the file name? ");
+    printf("Enter the name of the file: ");
     scanf("%s", file_name);
 
     if (remove(file_name) == 0) {
-        printf("File deleted successfully. Nice!\n");
+        printf("File deleted successfully.\n");
     } else {
-        printf("Oops, couldn't delete the file.\n");
+        printf("Error deleting file.\n");
     }
 }
 
 int main() {
     int choice;
 
-    printf("Welcome to the File Management System!\n");
+    printf("File Management System\n");
 
     while (1) {
-        printf("\nWhat do you wanna do?\n");
+        printf("\nSelect an option:\n");
         printf("1. Create a File\n");
         printf("2. Write to a File\n");
         printf("3. Read a File\n");
@@ -98,4 +98,25 @@ int main() {
 
         switch (choice) {
             case 1:
-               
+                create_file();
+                break;
+            case 2:
+                write_file();
+                break;
+            case 3:
+                read_file();
+                break;
+            case 4:
+                delete_file();
+                break;
+            case 5:
+                printf("Thank you for using the file management system. Goodbye!\n");
+                return 0;
+            default:
+                printf("Invalid choice. Please try again.\n");
+                break;
+        }
+    }
+
+    return 0;
+}
